@@ -1,7 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { useAppSelector } from "@/redux/hook";
-import { Link } from "lucide-react";
 
 const getPerformance = (percentage: number) => {
   if (percentage >= 90) {
