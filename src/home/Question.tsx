@@ -1,9 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import QuizControls from "./QuizControls";
 import { setAnswer } from "@/redux/features/quizSlice";
@@ -14,7 +10,14 @@ export default function Question() {
     (state) => state.quiz
   );
 
-  const currentQuiz = quizes[currentQuizIndex];
+  const currentQuiz = quizes?.[currentQuizIndex];
+
+  if (!currentQuiz) {
+    // Render nothing or a placeholder if there's no current quiz.
+    // This prevents crashes if `quizes` is empty or `currentQuizIndex` is out of bounds.
+    return null;
+  }
+
   const currentAnswer = userAnswer[currentQuizIndex];
 
   const handleOption = (ans: string) => {
@@ -24,7 +27,6 @@ export default function Question() {
         answer: ans,
       })
     );
-    console.log(ans);
   };
 
   return (
@@ -36,7 +38,7 @@ export default function Question() {
           <div>
             {currentQuiz.options.map((opt, idx) => (
               <Button
-              variant={opt === currentAnswer ? "default" : "outline"}
+                variant={opt === currentAnswer ? "default" : "outline"}
                 onClick={() => handleOption(opt)}
                 key={idx}
                 className="w-full mt-3 "
@@ -49,7 +51,6 @@ export default function Question() {
 
           <QuizControls></QuizControls>
         </CardContent>
-        
       </Card>
     </div>
   );

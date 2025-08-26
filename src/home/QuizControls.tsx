@@ -22,7 +22,6 @@ export default function QuizControls() {
   const handleCompleteQuiz = () => {
     dispatch(completeQuiz());
   };
-  console.log(currentQuizIndex, quizes.length - 1);
 
   return (
     <div className="flex justify-between mt-4">

@@ -2,7 +2,7 @@ import { quizData } from "@/home/quizData";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    quizes: quizData,
+    quizes: [],
     currentQuizIndex: 0,
     userAnswer: Array(quizData.length).fill(null),
     quizComplete: false
@@ -28,10 +28,13 @@ const quizSlice = createSlice({
         },
         completeQuiz: (state) =>{
             state.quizComplete = true
+        },
+        setQuiz: (state,action)=>{
+            state.quizes = action.payload
         }
     }
 })
 
-export const { setAnswer, nextQues, prevQues, completeQuiz } = quizSlice.actions
+export const { setAnswer, nextQues, prevQues, completeQuiz, setQuiz } = quizSlice.actions
 
 export default quizSlice.reducer
